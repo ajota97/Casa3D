@@ -11,14 +11,14 @@ using System.Drawing;
 
 namespace Proyecto1
 {
-    public class Cubo
+    public class Casa
     {
         private float ancho;
         private float alto;
         private float profundidad;
         public Punto origen;
 
-        public Cubo(Punto p, float ancho, float alto, float profundidad)
+        public Casa(Punto p, float ancho, float alto, float profundidad)
         {
             origen = p;
             this.ancho = ancho;
@@ -69,10 +69,6 @@ namespace Proyecto1
 
             GL.End();
         }
-
-
-
-
 
 
         private void front(PrimitiveType primitiveType)
