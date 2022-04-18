@@ -15,7 +15,8 @@ namespace Proyecto1
     {
        
         
-        public Casa cubo;
+        public Casa casa;
+        public Casa casa2;
 
         
         //-----------------------------------------------------------------------------------------------------------------
@@ -30,7 +31,8 @@ namespace Proyecto1
         {
             
             GL.ClearColor(Color4.Black);
-            cubo = new Casa(new Punto(), 9, 7 ,7);
+            casa = new Casa(new Punto(), 9, 7 ,7);
+            casa2 = new Casa(new Punto(15), 5, 5, 5);
             base.OnLoad(e);     
         }
         //-----------------------------------------------------------------------------------------------------------------
@@ -48,7 +50,8 @@ namespace Proyecto1
             GL.Enable(EnableCap.DepthTest);
             GL.LoadIdentity();
             //-----------------------
-            this.cubo.Dibujar();
+            this.casa.Dibujar();
+            this.casa2.Dibujar();
             //-----------------------
             Context.SwapBuffers();
             base.OnRenderFrame(e);
