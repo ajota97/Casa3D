@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Casa.cs" />
+    <Compile Include="Drawing.cs" />
     <Compile Include="Extras\Punto.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Program.cs" />

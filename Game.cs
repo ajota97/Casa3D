@@ -15,9 +15,11 @@ namespace Proyecto1
     {
        
         
-        public Casa casa;
+        public Drawing triangle1;
+        public Drawing triangle2;
+        private Punto punto2=new Punto(10,10,10);
 
-        
+
         //-----------------------------------------------------------------------------------------------------------------
         public Game(int width, int height, string title) : base(width, height, GraphicsMode.Default, title) { }
         //-----------------------------------------------------------------------------------------------------------------
@@ -30,7 +32,8 @@ namespace Proyecto1
         {
             
             GL.ClearColor(Color4.Black);
-            casa = new Casa(new Punto(), 9, 7 ,7);
+            triangle1 = new Drawing(new Punto(), 7, 7 ,0);
+            triangle2 = new Drawing(punto2, 5, 5, 0);
             base.OnLoad(e);     
         }
         //-----------------------------------------------------------------------------------------------------------------
@@ -48,7 +51,8 @@ namespace Proyecto1
             GL.Enable(EnableCap.DepthTest);
             GL.LoadIdentity();
             //-----------------------
-            this.casa.Dibujar();
+            this.triangle1.Draw();
+            this.triangle2.Draw();
             //-----------------------
             Context.SwapBuffers();
             base.OnRenderFrame(e);
