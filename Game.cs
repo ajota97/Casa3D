@@ -16,8 +16,9 @@ namespace Proyecto1
        
         
         public Drawing triangle1;
+        Dictionary<String, float> coords;
         public Drawing triangle2;
-        private Punto punto2=new Punto(10,10,10);
+         private Punto punto2=new Punto(10,10,10);
 
 
         //-----------------------------------------------------------------------------------------------------------------
@@ -32,7 +33,9 @@ namespace Proyecto1
         {
             
             GL.ClearColor(Color4.Black);
-            triangle1 = new Drawing(new Punto(), 7, 7 ,0);
+            //triangle1 = new Drawing(new Punto(), 7, 7 ,0);
+            triangle1 = new Drawing(new Punto());
+            coords = triangle1.GetObjeto("test.txt");
             triangle2 = new Drawing(punto2, 5, 5, 0);
             base.OnLoad(e);     
         }
@@ -51,7 +54,8 @@ namespace Proyecto1
             GL.Enable(EnableCap.DepthTest);
             GL.LoadIdentity();
             //-----------------------
-            this.triangle1.Draw();
+            
+            triangle1.DrawCoord(coords);
             this.triangle2.Draw();
             //-----------------------
             Context.SwapBuffers();
