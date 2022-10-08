@@ -1,4 +1,5 @@
 ﻿using OpenTK;
+using Proyecto1;
 using Proyecto1_01.Utils;
 using System;
 using System.Collections.Generic;
@@ -6,41 +7,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Proyecto1_01.classes
 {
-    class Escenario:IDibujable 
+    [Serializable]
+    class Escenario 
     {
-        Dictionary<String, Objeto> listaObjeto = new Dictionary<string, Objeto>();
-        private Vector3 centro;
 
-        public Escenario(Dictionary<string, Objeto> listaObjeto, Vector3 centro)
+        private Dictionary<String, Objeto> listaObject { get; set; }
+        private Punto centr { get; set; }
+
+        public Dictionary<string, Objeto> listaObjetos { get { return listaObject; } set { listaObject = value; } }
+         public Punto centro { get { return centr; } set { centr = value; } }
+
+        public Escenario(Dictionary<string, Objeto> listaObjeto, Punto centro)
         {
-            this.listaObjeto = listaObjeto;
-            this.centro = centro;
+            this.listaObject = listaObjeto;
+            this.centr = centro;
         }
 
-        public Vector3 getCentro() {
-            return centro;
+        public Escenario()
+        {
+            this.centr = centro;
         }
 
-        public void setCentro(Vector3 c) {
-            centro = c;
-        }
-
-        public Dictionary<String,Objeto> getListaObjeto() { 
-        return this.listaObjeto;
-        }
 
         public void añadir(string nombre, Objeto nObjeto) {
-            listaObjeto.Add(nombre, nObjeto); 
+            listaObjetos.Add(nombre, nObjeto); 
         }
 
         public void dibujar()
         {
-            throw new NotImplementedException();
+            foreach (var objeto in listaObjetos) {
+               
+                objeto.Value.dibujar(centro);
+            }
         }
 
-        //TODO Dibujar
+        public void setSerializable(Escenario esc, String name) {
+            Converter<Escenario> c = new Converter<Escenario>();
+            c.saveObjeto(esc, name);
+        }
 
+        public void  GetSerializable(String filename)
+        {
+            Converter<Escenario> c = new Converter<Escenario>();
+            Escenario esc = c.GetSerializable(filename);
+            this.centr = new Punto(esc.centro.x, esc.centro.y, esc.centro.z);
+            listaObjetos = esc.listaObjetos;
+          
+        }
     }
 }

@@ -4,44 +4,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
+using Proyecto1;
 using Proyecto1_01.Utils;
+using OpenTK.Graphics.OpenGL;
 
 namespace Proyecto1_01.classes
 {
-    class Parte:IDibujable
+    [Serializable]
+    class Parte
     {
-        Dictionary<String, Vector3> listaPuntos = new Dictionary<string, Vector3>();
-        public Vector3 centro;
 
-        public Parte(Dictionary<string, Vector3> listaPuntos, Vector3 centro)
+        private Dictionary<String, Punto> listaPunto { get; set; }
+        private Punto centr { get; set; }
+
+        public Dictionary<string, Punto> listaPuntos { get { return listaPunto; } set { listaPunto = value; } }
+        public Punto centro { get { return centr; } set { centr = value; } }
+
+        public Parte(Dictionary<string, Punto> listaPuntos, Punto centro)
         {
-            this.listaPuntos = listaPuntos; 
-            this.centro = centro;
+            this.listaPunto = listaPuntos; 
+            this.centr = centro;
         }
 
-        public Vector3 getCentro() {
-            return centro;
-        }
-
-        public void setCentro(Vector3 c) {
-            centro = c;
-        }
-
-        public Dictionary<String, Vector3> getListaPartes() {
-            return listaPuntos;
-        }
-
-        public void setListaPartes(Dictionary<string, Vector3> v) {
-            this.listaPuntos = v;
-        }
-
-        public void añadir(String nombre, Vector3 v) {
+        public void añadir(String nombre, Punto v) {
             listaPuntos.Add(nombre, v); 
         }
 
-        public void dibujar()
+        public void dibujar(Punto p1,Punto p2)
         {
-            throw new NotImplementedException();
+            //GL.Rotate(10, 1, 1, 0);
+            PrimitiveType primitiveType = PrimitiveType.Polygon;
+            GL.Begin(primitiveType);
+           // GL.Rotate(15, 1, 1, 1);
+
+            Dictionary<string, Punto>.ValueCollection misPuntos = listaPuntos.Values;
+
+            foreach (Punto p in misPuntos)
+            {
+                GL.Vertex3(p1.x+p2.x+centro.x + p.x,p1.y+p2.y+centro.y+ p.y,p1.z+p2.z+ centro.z+ p.z );
+            }
+
+            GL.End();
+            GL.PopMatrix();
         }
     }
 }

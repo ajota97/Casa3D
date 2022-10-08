@@ -1,4 +1,5 @@
 ﻿using OpenTK;
+using Proyecto1;
 using Proyecto1_01.Utils;
 using System;
 using System.Collections.Generic;
@@ -8,31 +9,19 @@ using System.Threading.Tasks;
 
 namespace Proyecto1_01.classes
 {
-    class Objeto : IDibujable
+    [Serializable]
+    class Objeto 
     {
-        Dictionary<String, Parte> listaPartes = new Dictionary<string, Parte>();
-        private Vector3 centro;
+        private Dictionary<String, Parte> listaParte { get; set; }
+        private Punto centr { get; set; }
+        
+        public Dictionary<string, Parte> listaPartes { get { return listaParte; } set { listaParte = value; } }
+        public Punto centro { get { return centr; } set { centr = value; } }
 
-        public Objeto(Dictionary<string, Parte> listaPartes, Vector3 centro)
+        public Objeto(Dictionary<string, Parte> listaPartes, Punto centro)
         {
-            this.listaPartes = listaPartes;
-            this.centro = centro;
-        }
-
-        public Vector3 getCentro() {
-            return centro;
-        }
-
-        public void setCentro(Vector3 c) {
-            centro = c;
-        }
-
-        public Dictionary<String, Parte> getListaPartes() {
-            return listaPartes;
-        }
-
-        public void setListaPartes(Dictionary<String,Parte> v) {
-            this.listaPartes = v;
+            this.listaParte = listaPartes;
+            this.centr = centro;
         }
 
         public void añadir(string nombre, Parte nParte)
@@ -40,9 +29,16 @@ namespace Proyecto1_01.classes
             listaPartes.Add(nombre, nParte);
         }
 
-        public void dibujar()
+        public void dibujar(Punto p)
         {
-            throw new NotImplementedException();
+
+            foreach (var parte in listaPartes)
+            {
+                parte.Value.dibujar(p,centro);
+                
+            }
         }
+
+        
     }
 }

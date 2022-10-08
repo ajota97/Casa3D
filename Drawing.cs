@@ -69,15 +69,15 @@ namespace Proyecto1
         private void SetObjeto(Dictionary<string, float> coords,String fileName)
         {
            
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.Converters.Add(new JavaScriptDateTimeConverter());
-            serializer.NullValueHandling = NullValueHandling.Ignore;
+            //JsonSerializer serializer = new JsonSerializer();
+            //serializer.Converters.Add(new JavaScriptDateTimeConverter());
+            //serializer.NullValueHandling = NullValueHandling.Ignore;
 
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\JOSE  MERIDA ROCA\Desktop\Computing engineering\Programacion grafica\ELC102-Proyecto1-tarea-1\bin\Debug\"+fileName+".txt"))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                serializer.Serialize(writer, coords);
-            }
+            //using (StreamWriter sw = new StreamWriter(@"C:\Users\JOSE  MERIDA ROCA\Desktop\Computing engineering\Programacion grafica\ELC102-Proyecto1-tarea-1\bin\Debug\"+fileName+".txt"))
+            //using (JsonWriter writer = new JsonTextWriter(sw))
+            //{
+            //    serializer.Serialize(writer, coords);
+            //}
         }
 
         public Dictionary<String,float> GetObjeto(string myFile)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto1
 {
-   
+    [Serializable]
     public class Punto
     {
         private float ejeX { get; set; }

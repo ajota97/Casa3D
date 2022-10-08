@@ -7,28 +7,24 @@ using System.IO;
 
 namespace Proyecto1_01.Utils
 {
-    class Converter
+    class Converter<T>
     {
         
-        public void saveObjeto(Objeto coords, String fileName)
+        public void saveObjeto(T coords, String fileName)
         {
 
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.Converters.Add(new JavaScriptDateTimeConverter());
-            serializer.NullValueHandling = NullValueHandling.Ignore;
-
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\JOSE  MERIDA ROCA\Desktop\Computing engineering\Programacion grafica\ELC102-Proyecto1-tarea-1\bin\Debug\" + fileName + ".json"))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                serializer.Serialize(writer, coords);
-            }
+                    String json = JsonConvert.SerializeObject(coords);
+            File.WriteAllText(fileName + ".json", json);
         }
 
-        public Objeto GetObjeto(string myFile)
+        public T GetSerializable(string myFile)
         {
-            string myjson = File.ReadAllText(myFile);
-            Objeto resp = JsonConvert.DeserializeObject<Objeto>(myjson);
-
+                        string json;
+            using (StreamReader jsonStream = File.OpenText(myFile))
+            {
+                json = jsonStream.ReadToEnd();
+            }
+            T resp = JsonConvert.DeserializeObject<T>(json);
             return resp;
         }
     }
